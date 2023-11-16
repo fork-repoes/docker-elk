@@ -2,12 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-
   test:
     name: Test suite
     # List of supported runners:
@@ -48,9 +47,9 @@ jobs:
       - name: Set password of every built-in user to 'testpasswd'
         run: |
 
-          sed -i -e 's/\(ELASTIC_PASSWORD=\)'\''changeme'\''/\1testpasswd/g' \
-                 -e 's/\(LOGSTASH_INTERNAL_PASSWORD=\)'\''changeme'\''/\1testpasswd/g' \
-                 -e 's/\(KIBANA_SYSTEM_PASSWORD=\)'\''changeme'\''/\1testpasswd/g' \
+          sed -i -e 's/\(ELASTIC_PASSWORD=\)'\''mechange'\''/\1testpasswd/g' \
+                 -e 's/\(LOGSTASH_INTERNAL_PASSWORD=\)'\''mechange'\''/\1testpasswd/g' \
+                 -e 's/\(KIBANA_SYSTEM_PASSWORD=\)'\''mechange'\''/\1testpasswd/g' \
                  -e 's/\(METRICBEAT_INTERNAL_PASSWORD=\)'\'\''/\1testpasswd/g' \
                  -e 's/\(FILEBEAT_INTERNAL_PASSWORD=\)'\'\''/\1testpasswd/g' \
                  -e 's/\(HEARTBEAT_INTERNAL_PASSWORD=\)'\'\''/\1testpasswd/g' \
@@ -63,7 +62,7 @@ jobs:
       #                                                        #
       ##########################################################
 
-      - name:  Run the stack
+      - name: Run the stack
         run: |
           docker compose up setup
           docker compose up -d

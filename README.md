@@ -158,11 +158,11 @@ Give Kibana about a minute to initialize, then access the Kibana web UI by openi
 browser and use the following (default) credentials to log in:
 
 * user: *elastic*
-* password: *changeme*
+* password: *mechange*
 
 > [!NOTE]
 > Upon the initial startup, the `elastic`, `logstash_internal` and `kibana_system` Elasticsearch users are intialized
-> with the values of the passwords defined in the [`.env`](.env) file (_"changeme"_ by default). The first one is the
+> with the values of the passwords defined in the [`.env`](.env) file (_"mechange"_ by default). The first one is the
 > [built-in superuser][builtin-users], the other two are used by Kibana and Logstash respectively to communicate with
 > Elasticsearch. This task is only performed during the _initial_ startup of the stack. To change users' passwords
 > _after_ they have been initialized, please refer to the instructions in the next section.
@@ -177,7 +177,7 @@ browser and use the following (default) credentials to log in:
 > [!WARNING]
 > Starting with Elastic v8.0.0, it is no longer possible to run Kibana using the bootstraped privileged `elastic` user.
 
-The _"changeme"_ password set by default for all aforementioned users is **unsecure**. For increased security, we will
+The _"mechange"_ password set by default for all aforementioned users is **unsecure**. For increased security, we will
 reset the passwords of all aforementioned Elasticsearch users to random secrets.
 
 1. Reset passwords for default users
