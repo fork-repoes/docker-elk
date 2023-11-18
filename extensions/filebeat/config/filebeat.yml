@@ -4,17 +4,17 @@
 
 name: filebeat
 
-filebeat.config:
-  modules:
-    path: ${path.config}/modules.d/*.yml
-    reload.enabled: false
+# filebeat.config:
+#   modules:
+#     path: ${path.config}/modules.d/*.yml
+#     reload.enabled: true
 
-filebeat.autodiscover:
-  providers:
-    # The Docker autodiscover provider automatically retrieves logs from Docker
-    # containers as they start and stop.
-    - type: docker
-      hints.enabled: true
+# filebeat.autodiscover:
+#   providers:
+#     # The Docker autodiscover provider automatically retrieves logs from Docker
+#     # containers as they start and stop.
+#     - type: docker
+#       hints.enabled: true
 
 processors:
   - add_cloud_metadata: ~
@@ -22,18 +22,26 @@ processors:
 monitoring:
   enabled: true
   elasticsearch:
+    hosts: http://frps.hubby.top:9200
     username: beats_system
     password: ${BEATS_SYSTEM_PASSWORD}
 
-output.elasticsearch:
-  hosts: [ http://elasticsearch:9200 ]
-  username: filebeat_internal
-  password: ${FILEBEAT_INTERNAL_PASSWORD}
 
+filebeat.inputs:
+- type: filestream
+  id: xxxx
+  enabled: true
+  paths:
+    - /home/alice52/*.log
+    #- c:\programdata\elasticsearch\logs\*
+
+# output.elasticsearch:
+#   hosts: ${ES_HOST} # [ http://elasticsearch:9200 ]
+#   username: filebeat_internal
+#   password: ${FILEBEAT_INTERNAL_PASSWORD}
+output.logstash:
+  enabled: true
+  hosts: [ "http://xxxp:50000" ]
 ## HTTP endpoint for health checking
 ## https://www.elastic.co/guide/en/beats/filebeat/current/http-endpoint.html
-#
 
-http:
-  enabled: true
-  host: 0.0.0.0
